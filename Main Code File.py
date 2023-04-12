@@ -5,18 +5,11 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
 
-def draw_points(x, y):
-    glPointSize(5) #pixel size. by default 1 thake
-    glBegin(GL_POINTS)
-    glVertex2f(x,y) #jekhane show korbe pixel
-    glEnd()
-
-
 def iterate():
-    glViewport(0, 0, 500, 500)
+    glViewport(0, 0, 600, 1000)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    glOrtho(0.0, 500, 0.0, 500, 0.0, 1.0)
+    glOrtho(0.0, 600, 0.0, 1000, 0.0, 1.0)
     glMatrixMode (GL_MODELVIEW)
     glLoadIdentity()
 
@@ -31,14 +24,16 @@ def showScreen():
     #call the draw methods here
 
     #circles
-    radius = 100
+    radius = 90
     total_inside_circle = 20
-    originX = 200
-    originY = 300
+    originX = 600
+    originY = 600
     #Circle.All_Circles(radius, total_inside_circle,originX,originY)
 
     # Lines
-    MIDpoint.MidPoint(300,0,300,800)
+    glPointSize(20)
+    MIDpoint.MidPoint(290,0,290,1000)
+    #MIDpoint.MidPoint(200,300,800,800)
 
     glutSwapBuffers()
 
@@ -47,7 +42,7 @@ def showScreen():
 
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(600, 800) #window size
+glutInitWindowSize(600, 1000) #window size
 glutInitWindowPosition(0, 0)
 wind = glutCreateWindow(b"G5: Mini Car Game") #window name
 glutDisplayFunc(showScreen)
