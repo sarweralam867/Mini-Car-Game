@@ -67,7 +67,7 @@ def showScreen():
 
 
 
-
+#incomplete
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)
 glutInitWindowSize(600, 1000) #window size
