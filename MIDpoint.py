@@ -1,7 +1,11 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-
+def draw_points(x, y):
+    glPointSize(10) #pixel size. by default 1 thake
+    glBegin(GL_POINTS)
+    glVertex2f(x,y) #jekhane show korbe pixel
+    glEnd()
 def Determine_Zone(x1, y1, x2, y2):
   dx = x2 - x1
   dy = y2 - y1
@@ -87,119 +91,3 @@ def MidPoint(x1, y1, x2, y2):
       d += E
       x+=1
 
-
-######## DIgits ########
-def digit_zero(displacement=0):
-  d = displacement
-  MidPoint(200 + d, 200, 200 + d, 400)
-  MidPoint(100 + d, 400, 200 + d, 400)
-  MidPoint(100 + d, 200, 200 + d, 200)
-  MidPoint(100 + d, 200, 100 + d, 400)
-
-def digit_one(displacement=0):
-  d = displacement
-  MidPoint(150 + d, 350, 200 + d, 400)
-  MidPoint(200 + d, 200, 200 + d, 400)
-  MidPoint(150 + d, 200, 250 + d, 200)
-
-def digit_two(displacement=0):
-  d = displacement
-  MidPoint(200 + d, 300, 200 + d, 400)
-  MidPoint(100 + d, 300, 200 + d, 300)
-  MidPoint(100 + d, 400, 200 + d, 400)
-  MidPoint(100 + d, 200, 200 + d, 200)
-  MidPoint(100 + d, 200, 100 + d, 300)
-
-def digit_three(displacement=0):
-  d = displacement
-  MidPoint(200 + d, 200, 200 + d, 400)
-  MidPoint(100 + d, 300, 200 + d, 300)
-  MidPoint(100 + d, 400, 200 + d, 400)
-  MidPoint(100 + d, 200, 200 + d, 200)
-
-def digit_four(displacement=0):
-  d = displacement
-  MidPoint(200+d, 200, 200+d, 400)
-  MidPoint(100+d, 300, 200+d, 300)
-  MidPoint(100+d, 300, 100+d, 400)
-
-
-def digit_five(displacement=0):
-  d = displacement
-  MidPoint(200 + d, 200, 200 + d, 300)
-  MidPoint(100 + d, 300, 200 + d, 300)
-  MidPoint(100 + d, 400, 200 + d, 400)
-  MidPoint(100 + d, 200, 200 + d, 200)
-  MidPoint(100 + d, 300, 100 + d, 400)
-
-def digit_six(displacement=0):
-  d = displacement
-  MidPoint(200 + d, 200, 200 + d, 300)
-  MidPoint(100 + d, 300, 200 + d, 300)
-  MidPoint(100 + d, 400, 200 + d, 400)
-  MidPoint(100 + d, 200, 200 + d, 200)
-  MidPoint(100 + d, 200, 100 + d, 400)
-
-def digit_seven(displacement=0):
-  d = displacement
-  MidPoint(100 + d, 400, 200 + d, 400)
-  MidPoint(150 + d, 200, 200 + d, 400)
-
-def digit_eight(displacement=0):
-  d = displacement
-  MidPoint(200 + d, 200, 200 + d, 400)
-  MidPoint(100 + d, 300, 200 + d, 300)
-  MidPoint(100 + d, 400, 200 + d, 400)
-  MidPoint(100 + d, 200, 200 + d, 200)
-  MidPoint(100 + d, 200, 100 + d, 400)
-
-def digit_nine(displacement=0):
-  d = displacement
-  MidPoint(200 + d, 200, 200 + d, 400)
-  MidPoint(100 + d, 300, 200 + d, 300)
-  MidPoint(100 + d, 400, 200 + d, 400)
-  MidPoint(100 + d, 200, 200 + d, 200)
-  MidPoint(100 + d, 300, 100 + d, 400)
-
-def Print_Last_Two_Digit(user_id):
-    if user_id[-2] == "0":
-        digit_zero()
-    elif user_id[-2] == "1":
-        digit_one(-20)
-    elif user_id[-2] == "2":
-        digit_two()
-    elif user_id[-2] == "3":
-        digit_three()
-    elif user_id[-2] == "4":
-        digit_four()
-    elif user_id[-2] == "5":
-        digit_five()
-    elif user_id[-2] == "6":
-        digit_six()
-    elif user_id[-2] == "7":
-        digit_seven()
-    elif user_id[-2] == "8":
-        digit_eight()
-    elif user_id[-2] == "9":
-        digit_nine()
-
-    if user_id[-1] == "0":
-        digit_zero(150)
-    elif user_id[-1] == "1":
-        digit_one(120)
-    elif user_id[-1] == "2":
-        digit_two(150)
-    elif user_id[-1] == "3":
-        digit_three(150)
-    elif user_id[-1] == "4":
-        digit_four(150)
-    elif user_id[-1] == "5":
-        digit_five(150)
-    elif user_id[-1] == "6":
-        digit_six(150)
-    elif user_id[-1] == "7":
-        digit_seven(150)
-    elif user_id[-1] == "8":
-        digit_eight(150)
-    elif user_id[-1] == "9":
-        digit_nine(150)

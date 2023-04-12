@@ -20,11 +20,14 @@ def iterate():
     glMatrixMode (GL_MODELVIEW)
     glLoadIdentity()
 
+def colorSet(a,b,c):
+    return glColor3f(a/255, b/255, c/255)
+
 def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
     iterate()
-    glColor3f(1.0, 1.0, 0.0) #konokichur color set (RGB)
+    colorSet(3, 236, 252) #konokichur color set (RGB)
     #call the draw methods here
 
     #circles
@@ -35,7 +38,7 @@ def showScreen():
     #Circle.All_Circles(radius, total_inside_circle,originX,originY)
 
     # Lines
-    MIDpoint.MidPoint()
+    MIDpoint.MidPoint(300,0,300,800)
 
     glutSwapBuffers()
 
@@ -44,9 +47,9 @@ def showScreen():
 
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(400, 600) #window size
+glutInitWindowSize(600, 800) #window size
 glutInitWindowPosition(0, 0)
-wind = glutCreateWindow(b"OpenGL Coding Practice") #window name
+wind = glutCreateWindow(b"G5: Mini Car Game") #window name
 glutDisplayFunc(showScreen)
 
 glutMainLoop()
