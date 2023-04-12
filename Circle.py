@@ -1,11 +1,10 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-
 def draw_points(x,y):
-    glPointSize(2) #pixel size. by default 1 thake
+    glPointSize(2)
     glBegin(GL_POINTS)
-    glVertex2f(x,y) #jekhane show korbe pixel
+    glVertex2f(x,y)
     glEnd()
 
 def eight_way_circlePoints(x, y, x0, y0):
@@ -34,8 +33,8 @@ def MidpointCircle(x0, y0, r):
     eight_way_circlePoints(x, y, x0, y0)
 
 import math
-def All_Circles(r,n):
-  MidpointCircle(250,250,r)
+def All_Circles(r,n, x1, x2):
+  MidpointCircle(x1, x2,r)
   a = r
   r = a // 2
   theta = (math.pi*2) / n
@@ -43,33 +42,9 @@ def All_Circles(r,n):
   while i <= n:
     x = r*math.cos(theta*i)
     y = r*math.sin(theta*i)
-    MidpointCircle(x+250, y+250, r)
+    MidpointCircle(x+x1, y+x2, r)
     i += 1
 
-def iterate():
-    glViewport(0, 0, 500, 500)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    glOrtho(0.0, 500, 0.0, 500, 0.0, 1.0)
-    glMatrixMode (GL_MODELVIEW)
-    glLoadIdentity()
 
-def showScreen():
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glLoadIdentity()
-    iterate()
-    glColor3f(1.0, 0.0, 1.0) #konokichur color set (RGB)
-    #call the draw methods here
-    radius = 200
-    total_inside_circle = 8
-    All_Circles(radius,total_inside_circle)
 
-    glutSwapBuffers()
 
-glutInit()
-glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(500, 500) #window size
-glutInitWindowPosition(0, 0)
-wind = glutCreateWindow(b"OpenGL Coding Practice") #window name
-glutDisplayFunc(showScreen)
-glutMainLoop()
