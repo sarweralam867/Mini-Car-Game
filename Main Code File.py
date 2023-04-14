@@ -1,17 +1,15 @@
 import Circle
 import MIDpoint
+import pygame
+import random
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-
-
-def iterate():
-    glViewport(0, 0, 600, 1000)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    glOrtho(0.0, 600, 0.0, 1000, 0.0, 1.0)
-    glMatrixMode (GL_MODELVIEW)
-    glLoadIdentity()
+from pygame.locals import *
+pygame.init()
+display_width = 600
+display_height = 800
+displays=pygame.display.set_mode((display_width,display_height))
 
 def colorSet(a,b,c):
     return glColor3f(a/255, b/255, c/255)
@@ -19,60 +17,61 @@ def colorSet(a,b,c):
 def pixel(a):
     return glPointSize(a)
 
-def showScreen():
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glLoadIdentity()
-    iterate()
-    157, 162, 171
-    #call the draw methods here
 
-    #circles
-    radius = 50
-    total_inside_circle = 100
-    d= 0
-    colorSet(156, 3, 11)
-    for i in range(2):
-        originX = 75
-        originY = 75 + d
-        Circle.All_Circles(radius, total_inside_circle,originX,originY)
 
-        originX = 75+150
-        originY = 75 + d + 150
-        Circle.All_Circles(radius, total_inside_circle, originX, originY)
 
-        originX = 75 + 300
-        originY = 75 + d + 300
-        Circle.All_Circles(radius, total_inside_circle,originX,originY)
 
-        originX = 75+450
-        originY = 75 + d + 450
-        Circle.All_Circles(radius, total_inside_circle, originX, originY)
-
-        d += 500
-
-    # Lines
+def road():
     pixel(20)
     colorSet(157, 162, 171)
-    MIDpoint.MidPoint(290,0,290,1000)
+    MIDpoint.MidPoint(0, -600, 0, 600)
 
     displacement = 0
     pixel(25)
     colorSet(255, 255, 255)
     for i in range(10):
-        MIDpoint.MidPoint(150, 0+displacement, 150, 50+displacement)
-        MIDpoint.MidPoint(450, 0 + displacement, 450, 50 + displacement)
+        MIDpoint.MidPoint(-150, 500 - displacement, -150, 450 - displacement)
+        MIDpoint.MidPoint(150, 500- displacement, 150, 450 - displacement)
         displacement += 250
 
-    glutSwapBuffers()
+def circle(d=0):
+    radius = 50
+    total_inside_circle = 100
+    colorSet(156, 3, 11)
+    originX = -225 + d
+    originY = 500
+    Circle.All_Circles(radius, total_inside_circle, originX, originY)
+
+def box(d=0):
+    colorSet(156, 3, 11)
+    pixel(100)
+    MIDpoint.MidPoint(-75+d, 500, -75+d, 540)
 
 
+def car(d=0):
+    colorSet(157, 255, 0)
+    pixel(100)
+    MIDpoint.MidPoint(0 + d, -340, 0 + d, -300)
 
-#incomplete
-glutInit()
-glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(600, 1000) #window size
-glutInitWindowPosition(0, 0)
-wind = glutCreateWindow(b"G5: Mini Car Game") #window name
-glutDisplayFunc(showScreen)
 
-glutMainLoop()
+def minicargame():
+    display = (600,1000) #Window Size
+    pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+    gluPerspective(25,1, 0.1, 50.0)
+    glTranslatef(0.0,0.0, -5)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        road()
+        circle()
+        box()
+        circle(300)
+        box(300)
+        car()
+        pygame.display.flip()
+        pygame.time.wait(10)
+minicargame()
