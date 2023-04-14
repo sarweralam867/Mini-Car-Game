@@ -4,7 +4,7 @@ from OpenGL.GLU import *
 def draw_points(x,y):
     glPointSize(2)
     glBegin(GL_POINTS)
-    glVertex2f(x/300,y/500)
+    glVertex2f(x/300,y/400)
     glEnd()
 
 def eight_way_circlePoints(x, y, x0, y0):

@@ -2,14 +2,13 @@ import Circle
 import MIDpoint
 import pygame
 import random
+import time
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from pygame.locals import *
-pygame.init()
-display_width = 600
-display_height = 800
-displays=pygame.display.set_mode((display_width,display_height))
+
+
 
 def colorSet(a,b,c):
     return glColor3f(a/255, b/255, c/255)
@@ -17,47 +16,46 @@ def colorSet(a,b,c):
 def pixel(a):
     return glPointSize(a)
 
-
-
-
-
 def road():
     pixel(20)
     colorSet(157, 162, 171)
-    MIDpoint.MidPoint(0, -600, 0, 600)
+    MIDpoint.MidPoint(0, 400, 0, -800)
 
     displacement = 0
     pixel(25)
     colorSet(255, 255, 255)
-    for i in range(10):
-        MIDpoint.MidPoint(-150, 500 - displacement, -150, 450 - displacement)
-        MIDpoint.MidPoint(150, 500- displacement, 150, 450 - displacement)
-        displacement += 250
+    for i in range(8):
+        MIDpoint.MidPoint(-150, 400 - displacement, -150, 350 - displacement)
+        MIDpoint.MidPoint(150, 400- displacement, 150, 350 - displacement)
+        displacement += 300
 
-def circle(d=0):
+def circle(d=0,dx=0):
     radius = 50
     total_inside_circle = 100
     colorSet(156, 3, 11)
     originX = -225 + d
-    originY = 500
+    originY = 800 -dx
     Circle.All_Circles(radius, total_inside_circle, originX, originY)
 
 def box(d=0):
     colorSet(156, 3, 11)
-    pixel(100)
-    MIDpoint.MidPoint(-75+d, 500, -75+d, 540)
+    pixel(60)
+    MIDpoint.MidPoint(-75+d, 700, -75+d, 840)
+    colorSet(5, 30, 71)
 
 
 def car(d=0):
     colorSet(157, 255, 0)
-    pixel(100)
-    MIDpoint.MidPoint(0 + d, -340, 0 + d, -300)
+    pixel(60)
+    MIDpoint.MidPoint(0 + d, -400, 0 + d, -360)
+    colorSet(157, 255, 0)
 
 
 def minicargame():
-    display = (600,1000) #Window Size
+    pygame.init()
+    display = (600,800) #Window Size
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
-    gluPerspective(25,1, 0.1, 50.0)
+    gluPerspective(45,(display[0]/display[1]), 0.1, 50.0)
     glTranslatef(0.0,0.0, -5)
 
     while True:
@@ -68,10 +66,13 @@ def minicargame():
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         road()
         circle()
-        box()
         circle(300)
+        box()
         box(300)
         car()
+
+
+
         pygame.display.flip()
         pygame.time.wait(10)
 minicargame()
