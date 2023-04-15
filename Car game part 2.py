@@ -60,7 +60,7 @@ def display():
     glDrawArrays(GL_QUADS, 0, 4)
     glDisableClientState(GL_VERTEX_ARRAY)
 
-    # Swap buffers
+
     pygame.display.flip()
 
 

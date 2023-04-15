@@ -6,7 +6,7 @@ import random
 import MIDpoint
 import Circle
 
-objects = []  # list to store the coordinates and speed of each object
+objects = [] 
 def pixel(a):
     return glPointSize(a)
 
@@ -31,7 +31,6 @@ def draw_object(position, color, type):
 
 
 def init():
-    # set up PyGame and PyOpenGL
     pygame.init()
     display = (500, 500)
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
@@ -40,21 +39,21 @@ def init():
     glMatrixMode(GL_MODELVIEW)
 
 
-    # set the initial coordinates and speed of each object
+
     for i in range(4):
         type= random.choice(["box", "circle"])
         if type == "box":
-            x = random.choice([75,175,-75,-175])  # random x-coordinate between -1 and 1
-            y1 = 220  # start at the top of the screen
+            x = random.choice([75,175,-75,-175])
+            y1 = 220
             y2 = 250
-            dy = -10 # random downward speed
-            color = (random.random(), random.random(), random.random())  # random color for each object
+            dy = -10
+            color = (random.random(), random.random(), random.random())
             objects.append((x, y1, x, y2, dy, color,type))
         else:
             x = random.choice([75,175,-75,-175])
             y = 250
-            dy = -10 # random downward speed
-            color = (random.random(), random.random(), random.random())  # random color for each object
+            dy = -10
+            color = (random.random(), random.random(), random.random())
             objects.append((x, y, dy, color, type))
 
 def road():
@@ -89,18 +88,16 @@ def main():
 
         road()
 
-        # loop through each object and draw the objects
+
         for i in range(4):
             if objects[i][-1] == "box":
                 x1, y1, x2, y2, dy, color, type = objects[i]
                 draw_object((x1, y1, x2, y2), color,type)
 
-               # update the position of the object
                 y1 += dy
                 y2 += dy
                 objects[i] = (x1, y1, x2, y2, dy, color, type)
 
-                # if the object has fallen off the bottom of the screen, reset its position and speed
                 if y1 < -250:
                     x = random.choice([75,175,-75,-175])
                     dy = -10
@@ -110,13 +107,12 @@ def main():
                 x, y, dy, color, type = objects[i]
                 draw_object((x, y), color,type)
 
-                # update the position of the object
                 y += dy
                 objects[i] = (x, y, dy, color,type)
 
-                # if the object has fallen off the bottom of the screen, reset its position and speed
+
                 if y < -250:
-                    x = random.uniform(-250,250)
+                    x = random.choice([75,175,-75,-175])
                     y = 250
                     dy = -10
                     color = (random.random(), random.random(), random.random())
