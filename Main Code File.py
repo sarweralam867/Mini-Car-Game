@@ -9,7 +9,6 @@ from OpenGL.GLU import *
 from pygame.locals import *
 
 
-
 def colorSet(a,b,c):
     return glColor3f(a/255, b/255, c/255)
 
@@ -53,6 +52,7 @@ def car(d=0):
 
 def minicargame():
     pygame.init()
+    clock = pygame.time.Clock()
     display = (600,800) #Window Size
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
     gluPerspective(45,(display[0]/display[1]), 0.1, 50.0)

@@ -3,7 +3,7 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 def draw_points(x, y):
     glBegin(GL_POINTS)
-    glVertex2f(x/300,y/400) #jekhane show korbe pixel
+    glVertex2f(x/250,y/250) #jekhane show korbe pixel
     glEnd()
 def Determine_Zone(x1, y1, x2, y2):
   dx = x2 - x1
