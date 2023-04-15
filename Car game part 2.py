@@ -1,14 +1,32 @@
 import pygame
 from pygame.locals import *
-
+import MIDpoint
+import Circle
 from OpenGL.GL import *
 from OpenGL.GLU import *
 import sys
 
-width, height = 640, 480
+width, height = 500, 500
 WHITE = (1.0, 1.0, 1.0)
 VEL = 0.1
+def pixel(a):
+    return glPointSize(a)
 
+def colorSet(a,b,c):
+    return glColor3f(a/255, b/255, c/255)
+def road():
+    pixel(20)
+    colorSet(157, 162, 171)
+
+    MIDpoint.MidPoint(0, 250, 0, -250)
+
+    displacement = 0
+    pixel(15)
+    colorSet(255, 255, 255)
+    for i in range(8):
+        MIDpoint.MidPoint(125, 220 - displacement, 125, 250 - displacement)
+        MIDpoint.MidPoint(-125, 220 - displacement, -125, 250 - displacement)
+        displacement += 200
 
 def main():
     global width, height, obj_vertices, obj_vbo, vel_x, vel_y
@@ -39,10 +57,13 @@ def display():
     vel_x = (keys[pygame.K_d] - keys[pygame.K_a]) * VEL
     vel_y = (keys[pygame.K_w] - keys[pygame.K_s]) * VEL
 
-
+    road()
     for i in range(0, len(obj_vertices), 2):
-        obj_vertices[i] += vel_x
-        obj_vertices[i + 1] += vel_y
+        if vel_x != 1 and vel_y != 1 and vel_x != -1 and vel_y != -1:
+            obj_vertices[i] += vel_x
+            obj_vertices[i + 1] += vel_y
+        else:
+            pass
 
     glBindBuffer(GL_ARRAY_BUFFER, obj_vbo)
     glBufferData(GL_ARRAY_BUFFER, 8 * 4, (GLfloat * 8)(*obj_vertices), GL_STATIC_DRAW)
