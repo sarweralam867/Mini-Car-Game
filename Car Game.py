@@ -6,7 +6,7 @@ import random
 import MIDpoint
 import Circle
 
-objects = [] 
+objects = []
 def pixel(a):
     return glPointSize(a)
 
